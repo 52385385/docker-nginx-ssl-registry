@@ -1,0 +1,16 @@
+nginx:
+  image: "nginx:latest"
+  ports: 
+    - 80:80
+    - 443:443
+  links:
+    - registry:REGISTRY_SERVER
+  volumes:
+    - /root/nginx/conf.d:/etc/nginx/conf.d
+    - /root/nginx/ssl:/etc/nginx/ssl
+    - /root/nginx/html:/usr/share/nginx/html
+
+registry:
+  image: "registry:2"
+  volumes:
+    - /root/nginx/registry:/var/lib/registry
